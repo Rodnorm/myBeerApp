@@ -1,0 +1,64 @@
+@import 'variables.scss';
+@import url('https://fonts.googleapis.com/css?family=Sniglet');
+
+#card {
+    border: 1px solid $lightPink;
+    text-align: center;
+    background-color: #121520;
+    min-width: 10rem;
+    min-height: 20rem;
+    align-self: center;
+    border-radius: 2%;
+    padding: .5rem;
+    text-align: justify;
+    #instructions {
+        display: flex;
+        justify-content: center;
+    }
+    p {
+    font-family: 'Sniglet', cursive;
+    }
+    .quantity {
+        font-size: 5rem;
+        display: flex;
+        justify-content: center;
+    }
+    #addIcon {
+        color: $lightPink
+    }
+
+    @keyframes counterClockwiseRotation {
+
+        100% {
+            transform: rotate(180deg);
+        }
+    }
+
+    @keyframes clockwiseRotation {
+
+        100% {
+            transform: rotate(-180deg);
+        }
+    }
+
+    .startRotateCounterClockwise {
+        animation-name: counterClockwiseRotation;
+        animation-duration: 500ms
+    }
+
+    .startRotateClockwise {
+        animation-name: clockwiseRotation;
+        animation-duration: 500ms
+    }
+}
+.flexCenter{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: $lightPink;
+    input {
+        width: 10rem;
+        height: 1.5rem;
+        border: 2px solid $lightPink;
+    }
+}

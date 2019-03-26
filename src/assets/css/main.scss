@@ -1,0 +1,69 @@
+@import "variables.scss";
+
+html,
+body {
+    color: $textGreen;
+    background-color: $darkPink;
+    a {
+    color: $lightPink;
+    }
+    #app {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    }
+    .icon {
+    color: $lightPink;
+    display: flex;
+    justify-content: center;
+    }
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+.makeFlex {
+    display: flex;
+    justify-content: space-around;
+}
+.columnOrder {
+    flex-direction: column;
+    flex-wrap: initial
+}
+.setWidth {
+    width: 4rem;
+    margin: 1rem
+}
+.centerAlign {
+    align-items: center
+}
+
+.activateHover:hover {
+    color: $lightPink;
+    animation-name: rotateOption;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    cursor: pointer;
+}
+
+@keyframes rotateOption {
+    0% {
+        transform: rotate(30deg)
+    }
+    50% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(30deg);
+    }
+}
+
+.startRotateOption {
+    animation-name: rotateOption;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.makeFlex.columnOrder.centerAlign.setWidth span:nth-child(3){
+    font-size: 75%
+}
