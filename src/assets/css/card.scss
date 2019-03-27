@@ -15,7 +15,7 @@
         display: flex;
         justify-content: center;
     }
-    p {
+    p, select, button, span {
     font-family: 'Sniglet', cursive;
     }
     .quantity {
@@ -57,8 +57,45 @@
     align-items: center;
     color: $lightPink;
     input {
-        width: 10rem;
-        height: 1.5rem;
+        width: 12rem;
+        height: 1.2rem;
         border: 2px solid $lightPink;
     }
+}
+.iconBox {
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+}
+.resetButton {
+    margin-top: 1rem;
+    background-color: $textGreen;
+    border: 2px solid $lightPink;
+    color: $darkPink
+}
+
+.startRotateReset {
+    animation-name: resetRotation;
+    animation-duration: 500ms
+}
+
+@keyframes resetRotation {
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes hideResetIcon {
+    100% {
+        opacity: 0;
+    }
+}
+
+.hideResetAnimation {
+    animation: hideResetIcon 500ms;
+    animation-fill-mode: forwards;
+}
+
+#resetIcon{
+    align-self: center;
 }

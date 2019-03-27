@@ -13,7 +13,13 @@ export default {
         beverage: {
             name: String,
             icon: String,
-            level: String
+            level: String,
+            cupSize: String,
+            quantity: Number
+        }
+    },
+    methods: {
+        calcUnits() {
         }
     }
 }

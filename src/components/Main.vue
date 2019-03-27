@@ -15,10 +15,15 @@ export default {
 };
 import Vue from 'vue';
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faBeer, faPlus, faMinus, faWineGlassAlt, faGlassWhiskey, faCocktail, faGlassMartiniAlt, faGlassCheers } from "@fortawesome/free-solid-svg-icons";
+import {
+    faBeer, faPlus, faMinus,
+    faWineGlassAlt, faGlassWhiskey,
+    faCocktail, faGlassMartiniAlt,
+    faGlassCheers, faRedo
+    } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faBeer, faPlus, faMinus, faGlassWhiskey, faWineGlassAlt, faCocktail, faGlassMartiniAlt, faGlassCheers);
+library.add(faBeer, faPlus, faMinus, faGlassWhiskey, faWineGlassAlt, faCocktail, faGlassMartiniAlt, faGlassCheers, faRedo);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

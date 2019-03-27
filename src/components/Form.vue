@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <div class="makeFlex">
-            <div>
-                <p> Qual a quantidade do copo? </p>
+    <div class="marginTop">
+        <div class="makeFlex columnOrder" > 
+            <div class="makeFlex">
                 <select v-model="drinkQuantity">
+                    <option selected value="null" hidden> Qual a quantidade do copo? </option>
                     <option>20 ml </option>
                     <option>40 ml </option>
                     <option>190 ml </option>
@@ -14,7 +14,7 @@
                 </select>        
             </div>
             <div>
-                <p> Escolha a quantidade de alcool na bebida  </p>
+                <p class="makeFlex"> Escolha a quantidade de alcool na bebida  </p>
                 <div class="makeFlex" style="flex-wrap: wrap">
                     <div class="makeFlex columnOrder centerAlign setWidth" v-for="drink in beverages" v-bind:key="drink._id" v-on:click="setDrink(drink._id)">
                         <font-awesome-icon class="activateHover" v-bind:icon="drink.beverageIcon" size="2x"/>
@@ -33,6 +33,9 @@ require('@/assets/css/form.scss');
 import MyBeer from './MyBeer';
 export default {
     name: 'FormComponent',
+    props: {
+        quantity: Number
+    },
     data: () => {
         return {
             drinkQuantity: null,
@@ -87,7 +90,9 @@ export default {
             this.selectedDrink = { 
                 icon : drink.beverageIcon, 
                 level: drink.beverageLevel, 
-                name: drink.beverageName 
+                name: drink.beverageName,
+                cupSize: this.drinkQuantity,
+                quantity: parseFloat(this.drinkQuantity.split(' ml')[0])
             };
             
         }
