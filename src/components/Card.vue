@@ -22,7 +22,7 @@
       </div>
     </div>
     <p class="quantity" v-if="price"> ${{ showPrice }} golpes</p>
-    <FormComponent :quantity="quantity"/>
+    <FormComponent :quantity="quantity" /> 
   </div>
 </template>
 
@@ -37,6 +37,7 @@ export default {
             quantity: 0,
             price: null,
             showPrice: '',
+            resetForm: true,
             showMaxPrice: false,
             hideResetButton: true
         }
@@ -101,20 +102,20 @@ export default {
             button.toggleAttribute('hidden')
           }
         },
-      resetItems() {
-        const icon = document.getElementById('resetIcon');
-        setTimeout(() => document.getElementById('resetButton').setAttribute('hidden','true'));
-        setTimeout(() => icon.classList.remove('hideResetAnimation'));
-        setTimeout(() => icon.classList.add('startRotateReset'));
-        setTimeout(() => icon.classList.remove("startRotateReset"), 500);
+        resetItems() {
+          const icon = document.getElementById('resetIcon');
+          setTimeout(() => document.getElementById('resetButton').setAttribute('hidden','true'));
+          setTimeout(() => icon.classList.remove('hideResetAnimation'));
+          setTimeout(() => icon.classList.add('startRotateReset'));
+          setTimeout(() => icon.classList.remove("startRotateReset"), 500);
 
-            this.quantity = 0;
-            this.price = null;
-            this.showPrice = '';
-            this.showMaxPrice = false;
-            this.hideResetButton = true;
-
-      }
+          this.quantity = 0;
+          this.price = null;
+          this.showPrice = '';
+          this.showMaxPrice = false;
+          this.hideResetButton = true;
+          this.resetForm = true;
+        }
     },
     components: {
       FormComponent

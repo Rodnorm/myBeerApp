@@ -36,6 +36,11 @@ export default {
     props: {
         quantity: Number
     },
+    watch: {
+        quantity: function() {
+            this.quantity === 0 ? this.drinkQuantity = null : '';
+        }
+    },
     data: () => {
         return {
             drinkQuantity: null,
@@ -94,7 +99,6 @@ export default {
                 cupSize: this.drinkQuantity,
                 quantity: parseFloat(this.drinkQuantity.split(' ml')[0])
             };
-            
         }
     }
 }
