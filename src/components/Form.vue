@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <MyBeer v-if="drinkQuantity && selectedDrink" :glass="drinkQuantity" :beverage="selectedDrink" class="makeFlex centerAlign columnOrder"/>
+        <MyBeer v-if="drinkQuantity && selectedDrink" :quantity="quantity" :glass="drinkQuantity" :beverage="selectedDrink" :update="updateMyBeer" class="makeFlex centerAlign columnOrder"/>
     </div>    
 </template>
 
@@ -34,11 +34,12 @@ import MyBeer from './MyBeer';
 export default {
     name: 'FormComponent',
     props: {
-        quantity: Number
+        quantity: Number,
     },
     watch: {
         quantity: function() {
             this.quantity === 0 ? this.drinkQuantity = null : '';
+            this.updateMyBeer = !this.updateMyBeer;
         }
     },
     data: () => {
@@ -46,12 +47,13 @@ export default {
             drinkQuantity: null,
             alcoholLevel: '',
             selectedDrink: null,
+            updateMyBeer: true,
             beverages: [
                 {   
                     _id: 0,
                     beverageName: 'Cerveja',
                     beverageIcon: 'beer',
-                    beverageLevel: ' 3.8% ~ 7%'
+                    beverageLevel: '3.8% ~ 7%'
                 },
                 {
                     _id: 1,
@@ -81,7 +83,7 @@ export default {
                     _id: 5,
                     beverageName: 'Outros',
                     beverageIcon: 'glass-cheers',
-                    beverageLevel: '??! %'
+                    beverageLevel: '0% ~ 0%'
                 }
             ]
         }
@@ -92,12 +94,14 @@ export default {
     methods: {
         setDrink(id) {
             const drink = this.beverages.find(item => item._id === id);
+            const splittedLevel = drink.beverageLevel.split('~');
             this.selectedDrink = { 
                 icon : drink.beverageIcon, 
-                level: drink.beverageLevel, 
+                level: splittedLevel.map(x => parseFloat(x.trim().replace('%',''))), 
                 name: drink.beverageName,
-                cupSize: this.drinkQuantity,
-                quantity: parseFloat(this.drinkQuantity.split(' ml')[0])
+                cupSize: parseFloat(this.drinkQuantity.split(' ml')[0]),
+                quantity: this.quantity,
+                showLevel: drink.level
             };
         }
     }

@@ -48,15 +48,11 @@ export default {
               const icon = document.getElementById(event.path[1].id || event.path[0].id || event.path[0].firstChild.id);
               if (icon.id.includes('add')) {
                 icon.classList.add("startRotateCounterClockwise");
-                setTimeout(() => {
-                  icon.classList.remove("startRotateCounterClockwise");
-                }, 500);
+                setTimeout(() => icon.classList.remove("startRotateCounterClockwise"), 500);
                 this.quantity ++;
-              } else if (this.quantity > 0){
+              } else if (this.quantity > 0) {
                 icon.classList.add("startRotateClockwise");
-                setTimeout(() => {
-                  icon.classList.remove("startRotateClockwise");
-                }, 500);
+                setTimeout(() => icon.classList.remove("startRotateClockwise"), 500);
                 this.quantity --;
               }
               this.handlePrice();
