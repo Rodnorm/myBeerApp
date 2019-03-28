@@ -15,7 +15,7 @@
     <p class="quantity"> {{ quantity }}</p>
     <div class="flexCenter columnOrder">
       <input type="number" v-model="price" placeholder="Insira o preço da palhaçada" v-on:input="handlePrice">
-      <p v-if="showMaxPrice"> Essa marvada ta cara demais, oxi, o máximo é 59,90 </p>
+      <p v-if="showMaxPrice"> {{ errorMsg }}</p>
       <div class="iconBox marginTop columnOrder" v-on:click="hideResetAnimation">
         <font-awesome-icon id="resetIcon" icon="redo" size="2x"/>
         <button id="resetButton" hidden="true" v-on:click="resetItems" class="resetButton"> Resetar a palhaçada toda? </button>
@@ -39,7 +39,8 @@ export default {
             showPrice: '',
             resetForm: true,
             showMaxPrice: false,
-            hideResetButton: true
+            hideResetButton: true,
+            errorMsg: ''
         }
     },
     methods: {
@@ -67,13 +68,19 @@ export default {
         handlePrice() {
           if (this.price > 59.9) {
             const priceToBePaid = 59.90 * this.quantity; 
-            this.showPrice = priceToBePaid.replace('.',',');
+            this.showPrice = priceToBePaid;
             this.price = 59.9;
-            this.showMaxPrice = !this.showMaxPrice;
+            this.errorMsg = 'Essa marvada ta cara demais, oxi, o máximo é 59,90';
+            this.showMaxPrice = true;
+            this.showPrice = priceToBePaid;
+          } else if (this.price <= 0) {
+            this.errorMsg = 'Que diabo de pinga barata é essa??!!';
+            this.showMaxPrice = true;
+            this.price = null;
+            this.showPrice = '';
           } else {
             let finalPrice = this.quantity * parseFloat(this.price);
             if (finalPrice) {
-              debugger
               if (finalPrice.toString().includes('.')) {
                 this.showPrice = finalPrice.toString().replace('.',',').substring(0, 5);
               } else if (finalPrice.toString().includes(',')) {
@@ -81,8 +88,8 @@ export default {
               } else {
                 this.showPrice = finalPrice.toString();
               }
-              this.showMaxPrice = false;
             }
+            this.showMaxPrice = false;
           }
         },
         hideResetAnimation() {
