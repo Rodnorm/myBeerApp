@@ -101,7 +101,7 @@ export default {
                 name: drink.beverageName,
                 cupSize: parseFloat(this.drinkQuantity.split(' ml')[0]),
                 quantity: this.quantity,
-                showLevel: drink.level
+                showLevel: drink.beverageLevel
             };
         }
     }

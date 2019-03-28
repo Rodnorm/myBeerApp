@@ -21,7 +21,7 @@
         <button id="resetButton" hidden="true" v-on:click="resetItems" class="resetButton"> Resetar a palhaçada toda? </button>
       </div>
     </div>
-    <p class="quantity" v-if="price"> ${{ showPrice }} golpes</p>
+    <p class="quantity" v-if="price"> ${{ showPrice }}</p>
     <FormComponent :quantity="quantity" /> 
   </div>
 </template>
