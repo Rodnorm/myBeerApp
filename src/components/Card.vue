@@ -6,19 +6,19 @@
     <p id="instructions">Gerencie sua manguaça nos botões abaixo</p>
     <div class="buttons">
       <div v-on:click="handleClick"  class="iconBox">
-        <font-awesome-icon id="addIcon" icon="plus" size="4x"/>
+        <font-awesome-icon id="addIcon" v-bind:class="{ startRotateCounterClockwise : counterClockWiseRotate}" icon="plus" size="4x"/>
       </div>
       <div  v-on:click="handleClick" class="iconBox">
-        <font-awesome-icon id="removeIcon" icon="minus" size="4x"/>
+        <font-awesome-icon id="removeIcon" v-bind:class="{ startRotateClockwise : clockWiseRotate }" icon="minus" size="4x"/>
       </div>
     </div>
     <p class="quantity"> {{ quantity }}</p>
     <div class="flexCenter columnOrder">
       <input type="number" v-model="price" placeholder="Insira o preço da palhaçada" v-on:input="handlePrice">
       <p v-if="showMaxPrice"> {{ errorMsg }}</p>
-      <div class="iconBox marginTop columnOrder" v-on:click="hideResetAnimation">
-        <font-awesome-icon id="resetIcon" icon="redo" size="2x"/>
-        <button id="resetButton" hidden="true" v-on:click="resetItems" class="resetButton"> Resetar a palhaçada toda? </button>
+      <div class="iconBox marginTop columnOrder" v-on:click="hideResetAnimationF">
+        <font-awesome-icon id="resetIcon" icon="redo" size="2x" v-bind:class="{ startRotateReset : toggleRotateAnimation, hideResetAnimation : toggleResetAnimation }"/>
+        <button id="resetButton" v-bind:hidden="hideResetButton" v-on:click="resetItems" class="resetButton"> Resetar a palhaçada toda? </button>
       </div>
     </div>
     <p class="quantity" v-if="price"> ${{ showPrice }}</p>
@@ -46,20 +46,25 @@ export default {
             resetForm: true,
             showMaxPrice: false,
             hideResetButton: true,
-            errorMsg: ''
+            errorMsg: '',
+            toggleResetAnimation: false,
+            clockWiseRotate: false,
+            counterClockWiseRotate: false,
+            toggleRotateAnimation: false
         }
     },
     methods: {
         handleClick(event) {
             if (this.getIconName(event)) {
-              const icon = document.getElementById(event.path[1].id || event.path[0].id || event.path[0].firstChild.id);
-              if (icon.id.includes('add')) {
-                icon.classList.add("startRotateCounterClockwise");
-                setTimeout(() => icon.classList.remove("startRotateCounterClockwise"), 500);
+              const iconId = event.path[1].id || event.path[0].id || event.path[0].firstChild.id;
+              
+              if (iconId.includes('add')) {
+                this.counterClockWiseRotate = true;
+                setTimeout(() => this.counterClockWiseRotate = false, 500);
                 this.quantity ++;
               } else if (this.quantity > 0) {
-                icon.classList.add("startRotateClockwise");
-                setTimeout(() => icon.classList.remove("startRotateClockwise"), 500);
+                this.clockWiseRotate = true;
+                setTimeout(() => this.clockWiseRotate = false, 500);
                 this.quantity --;
               }
               this.handlePrice();
@@ -98,31 +103,20 @@ export default {
             this.showMaxPrice = false;
           }
         },
-        hideResetAnimation() {
-          const icon = document.getElementById('resetIcon');
-          const button = document.getElementById('resetButton');
-          let iconHasAnimation = false;
-          icon.classList.forEach(item =>  item === 'hideResetAnimation' ? iconHasAnimation = true : iconHasAnimation = false);
-          if (iconHasAnimation) {
-              icon.classList.remove('hideResetAnimation');
-              button.toggleAttribute('hidden')
-          } else {
-            icon.classList.add('hideResetAnimation');
-            button.toggleAttribute('hidden')
-          }
+        hideResetAnimationF() {
+          this.hideResetAnimation = !this.hideResetAnimation;
+          this.hideResetButton = !this.hideResetButton;
         },
         resetItems() {
-          const icon = document.getElementById('resetIcon');
-          setTimeout(() => document.getElementById('resetButton').setAttribute('hidden','true'));
-          setTimeout(() => icon.classList.remove('hideResetAnimation'));
-          setTimeout(() => icon.classList.add('startRotateReset'));
-          setTimeout(() => icon.classList.remove("startRotateReset"), 500);
+          setTimeout(() => this.hideResetAnimation = false);
+          setTimeout(() => this.hideResetButton = true);
+          setTimeout(() => this.toggleRotateAnimation = !this.toggleRotateAnimation);
+          setTimeout(() => this.toggleRotateAnimation = !this.toggleRotateAnimation, 500);
 
           this.quantity = 0;
           this.price = null;
           this.showPrice = '';
           this.showMaxPrice = false;
-          this.hideResetButton = true;
           this.resetForm = true;
         }
     },
