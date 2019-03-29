@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.4546427a58425a8738ddf5da3898d870.js"
+  "precache-manifest.7bb1e2c5c1f20fbdde68323db9404f31.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "bebe-papai"});

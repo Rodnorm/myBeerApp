@@ -5,11 +5,10 @@
     border: 1px solid $lightPink;
     text-align: center;
     background-color: #121520;
-    min-width: 10rem;
-    min-height: 20rem;
-    align-self: center;
+    min-width: auto;
+    min-height: auto;
     border-radius: 2%;
-    padding: .5rem;
+    padding: 2vw;
     text-align: justify;
     #instructions {
         display: flex;
@@ -19,9 +18,10 @@
     font-family: 'Sniglet', cursive;
     }
     .quantity {
-        font-size: 5rem;
+        font-size: 15vw;
         display: flex;
         justify-content: center;
+        margin: .5vw;
     }
     #addIcon {
         color: $lightPink
@@ -57,18 +57,18 @@
     align-items: center;
     color: $lightPink;
     input {
-        width: 12rem;
-        height: 1.2rem;
+        width: 60vw;
+        height: 4vw;
         border: 2px solid $lightPink;
     }
 }
 .iconBox {
-    width: 10rem;
+    width: 60vw;
     display: flex;
     justify-content: center;
 }
 .resetButton {
-    margin-top: 1rem;
+    margin-top: 1vw;
     background-color: $textGreen;
     border: 2px solid $lightPink;
     color: $darkPink
@@ -100,7 +100,7 @@
     align-self: center;
 }
 .credits {
-    font-size: .75rem;
+    font-size: .8rem;
     display: flex;
     justify-content: center;
 }

@@ -11,6 +11,7 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin: auto;
     }
     .icon {
     color: $lightPink;
@@ -31,8 +32,8 @@ body {
     flex-wrap: initial
 }
 .setWidth {
-    width: 4rem;
-    margin: 1rem
+    width: 20vw;
+    margin: .5vw
 }
 .centerAlign {
     align-items: center
@@ -45,7 +46,13 @@ body {
     animation-iteration-count: infinite;
     cursor: pointer;
 }
-
+.myBeer {
+    color: $lightPink;
+    animation-name: rotateOption;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    cursor: pointer;
+}
 @keyframes rotateOption {
     0% {
         transform: rotate(30deg)
@@ -66,4 +73,10 @@ body {
 
 .makeFlex.columnOrder.centerAlign.setWidth span:nth-child(3){
     font-size: 75%
+}
+
+.makeFlex.centerAlign.marginTop button {
+    background-color: $lightPink;
+    color: $darkPink;
+    border: none;
 }

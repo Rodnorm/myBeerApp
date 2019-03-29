@@ -1,34 +1,34 @@
 <template>
   <div id="card">
-    <div class="icon">
-      <font-awesome-icon icon="beer" size="4x"/>
-    </div>
-    <p id="instructions">Gerencie sua manguaça nos botões abaixo</p>
-    <div class="buttons">
-      <div v-on:click="handleClick"  class="iconBox">
-        <font-awesome-icon id="addIcon" v-bind:class="{ startRotateCounterClockwise : counterClockWiseRotate}" icon="plus" size="4x"/>
+    <div v-if="!showOptions">
+    
+      <div class="icon">
+        <font-awesome-icon icon="beer" size="4x"/>
       </div>
-      <div  v-on:click="handleClick" class="iconBox">
-        <font-awesome-icon id="removeIcon" v-bind:class="{ startRotateClockwise : clockWiseRotate }" icon="minus" size="4x"/>
+      <p id="instructions">Gerencie sua manguaça nos botões abaixo</p>
+      <div class="buttons">
+        <div v-on:click="handleClick"  class="iconBox">
+          <font-awesome-icon id="addIcon" v-bind:class="{ startRotateCounterClockwise : counterClockWiseRotate}" icon="plus" size="4x"/>
+        </div>
+        <div  v-on:click="handleClick" class="iconBox">
+          <font-awesome-icon id="removeIcon" v-bind:class="{ startRotateClockwise : clockWiseRotate }" icon="minus" size="4x"/>
+        </div>
       </div>
-    </div>
-    <p class="quantity"> {{ quantity }}</p>
-    <div class="flexCenter columnOrder">
-      <input type="number" v-model="price" placeholder="Insira o preço da palhaçada" v-on:input="handlePrice">
-      <p v-if="showMaxPrice"> {{ errorMsg }}</p>
-      <div class="iconBox marginTop columnOrder" v-on:click="hideResetAnimationF">
-        <font-awesome-icon id="resetIcon" icon="redo" size="2x" v-bind:class="{ startRotateReset : toggleRotateAnimation, hideResetAnimation : toggleResetAnimation }"/>
-        <button id="resetButton" v-bind:hidden="hideResetButton" v-on:click="resetItems" class="resetButton"> Resetar a palhaçada toda? </button>
+      <p class="quantity"> {{ quantity }}</p>
+      <div class="flexCenter columnOrder">
+        <input type="number" v-model="price" placeholder="Insira o preço da palhaçada" v-on:input="handlePrice">
+        <p v-if="showMaxPrice"> {{ errorMsg }}</p>
+        <div class="iconBox marginTop columnOrder" v-on:click="hideResetAnimationF">
+          <font-awesome-icon id="resetIcon" icon="redo" size="2x" v-bind:class="{ startRotateReset : toggleRotateAnimation, hideResetAnimation : toggleResetAnimation }"/>
+          <button id="resetButton" v-bind:hidden="hideResetButton" v-on:click="resetItems" class="resetButton"> Resetar a palhaçada toda? </button>
+        </div>
       </div>
+      <p class="quantity" v-if="price"> ${{ showPrice }}</p>
     </div>
-    <p class="quantity" v-if="price"> ${{ showPrice }}</p>
-    <FormComponent :quantity="quantity" />
-    <div class="credits">
-        Icons made by
-        <a href="https://www.freepik.com/" title="Freepik">Freepik</a>
-        from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-        is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-    </div>
+    <div class="makeFlex centerAlign marginTop">
+      <button v-on:click="showOptions = !showOptions">{{ showOptions ? goBack : otherOpt }}</button>
+    </div>  
+    <FormComponent v-bind:hidden="!showOptions" :quantity="quantity" />
   </div>
 </template>
 
@@ -50,7 +50,10 @@ export default {
             toggleResetAnimation: false,
             clockWiseRotate: false,
             counterClockWiseRotate: false,
-            toggleRotateAnimation: false
+            toggleRotateAnimation: false,
+            showOptions: false,
+            otherOpt: 'Mais opções',
+            goBack: 'Voltar',
         }
     },
     methods: {

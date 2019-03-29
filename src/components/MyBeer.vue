@@ -1,11 +1,11 @@
 <template>
     <div>
-        <font-awesome-icon class="activateHover" v-bind:icon="beverage.icon" size="2x"/>
+        <font-awesome-icon class="myBeer" v-bind:icon="beverage.icon" size="2x"/>
         <p> Seu copo de {{ beverage.name }} possui {{ glass}} e um volume de {{ beverage.showLevel }} de álcool </p>
         <p v-if="minUnit != ''"> Você bebeu entre {{ minUnit }} e {{ maxUnit }} unidades de álcool, 
             você estará completamente sem traços de álcool no sangue entre {{ minTimeToSoberUp }} e {{ maxTimeToSoberUp }} horas.
         </p>
-        <p v-if="minUnit != ''"> Isso quer dizer que após {{ maxTimeToSoberUp }} o bafômetro, provavelmente não te pega mais xD </p>
+        <p v-if="minUnit != ''"> Isso quer dizer que após {{ maxTimeToSoberUp }} horas o bafômetro, provavelmente não te pega mais xD </p>
         <p> Dez minutos depois do primeiro gole, 50% do álcool ingerido vai pra corrente sanguínea. </p>
     </div>
 </template>
